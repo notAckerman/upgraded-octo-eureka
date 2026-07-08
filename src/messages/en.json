@@ -1,0 +1,242 @@
+{
+  "meta": {
+    "description": "OpenAI-compatible gateway to models from OpenAI, Anthropic, Google and more. Balance in rubles, pay per token, no foreign bank cards."
+  },
+  "nav": {
+    "models": "Models & pricing",
+    "how": "How it works",
+    "docs": "Docs",
+    "login": "Sign in",
+    "getKey": "Get a key",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu",
+    "telegram": "Telegram channel"
+  },
+  "hero": {
+    "before": "Access to the ",
+    "accent": "best LLMs",
+    "after": " through one key",
+    "subline": "An OpenAI-compatible API to OpenAI, Anthropic, Google and other models. Balance in rubles, pay per token, no foreign bank cards.",
+    "getKey": "Get a key",
+    "docs": "Docs",
+    "copy": "Copy request example"
+  },
+  "marquee": {
+    "label": "One key for every provider"
+  },
+  "how": {
+    "title": "From top-up to first response in three steps",
+    "s1t": "Top up your balance",
+    "s1b": "SBP, crypto or Lolzteam Market. Rubles to your balance, no foreign bank cards.",
+    "s2t": "Create a key",
+    "s2b": "One sk-uzel-... key in the dashboard. Works with the official OpenAI SDK.",
+    "s3t": "Send a request",
+    "s3b": "Point to our base URL and a model. We charge your balance by actual token usage."
+  },
+  "live": {
+    "title": "Works with your current SDK",
+    "subtitle": "One key and balance, two formats to choose from. Change only the base URL — streaming passes through untouched.",
+    "response": "Hi! Replying through Uzel, a single gateway to the models. The same key and balance work with both the OpenAI SDK and the Anthropic SDK.",
+    "copy": "Copy code"
+  },
+  "pricing": {
+    "title": "Transparent pricing. Pay for tokens.",
+    "subtitle": "Prices in rubles per 1M tokens. Charged by actual usage, no subscriptions or minimums.",
+    "search": "Search a model",
+    "all": "All",
+    "colModel": "Model",
+    "colProvider": "Provider",
+    "colContext": "Context",
+    "colIn": "₽ / 1M in",
+    "colOut": "₽ / 1M out",
+    "empty": "Nothing found. Try another query."
+  },
+  "bento": {
+    "title": "Everything you need on one balance",
+    "balanceLabel": "One balance for every model",
+    "balanceBody": "Top up once, spend on any model in the catalog. No separate accounts per provider.",
+    "uptimeLabel": "Uptime",
+    "uptimeBody": "Public status page, 99.9% availability target.",
+    "streamLabel": "Streaming out of the box",
+    "streamBody": "SSE passes through untouched, token by token, like the provider.",
+    "payLabel": "Pay locally",
+    "paySbp": "SBP",
+    "payCrypto": "Crypto",
+    "payLolz": "Lolzteam Market",
+    "supportLabel": "Support on Telegram",
+    "supportBody": "Live answers and alerts. Dashboard tickets mirror to chat.",
+    "openChannel": "Open channel"
+  },
+  "comparison": {
+    "title": "Directly with providers or through Uzel",
+    "directLabel": "Directly with providers",
+    "uzelLabel": "Through Uzel",
+    "direct": [
+      "Foreign bank cards and a VPN to pay",
+      "A separate key and invoice per provider",
+      "Prices in dollars, tied to the exchange rate",
+      "Invoices in English, no closing documents",
+      "Sign-up and waiting for access"
+    ],
+    "uzel": [
+      "SBP, crypto and Lolzteam in rubles",
+      "One key for every model in the catalog",
+      "Fixed prices in rubles per 1M tokens",
+      "Clear receipts and history in the dashboard",
+      "A key in a minute, no waiting"
+    ]
+  },
+  "stats": {
+    "s1l": "models in the catalog",
+    "s2l": "tokens maximum context",
+    "s3l": "ways to top up",
+    "s4l": "requests per minute per key"
+  },
+  "faq": {
+    "title": "FAQ",
+    "items": [
+      {
+        "q": "Is it compatible with the OpenAI SDK?",
+        "a": "Yes. Point to our base URL and key, the rest of your code stays the same. The /v1/chat/completions endpoint works in streaming and non-streaming modes."
+      },
+      {
+        "q": "How do I top up via SBP, crypto or Lolz?",
+        "a": "SBP, crypto and Lolzteam Market are supported. Credited in rubles; the fee and rate are shown before payment, and the balance updates after confirmation."
+      },
+      {
+        "q": "How are tokens and cost calculated?",
+        "a": "By actual usage: (input tokens x input price + output x output price) / 1,000,000. Prices are fixed in rubles and shown in the model catalog."
+      },
+      {
+        "q": "Which models are available?",
+        "a": "Models from OpenAI, Anthropic, Google, DeepSeek, Qwen, Mistral and more. The full list with prices and context is in the dashboard."
+      },
+      {
+        "q": "What are the rate limits?",
+        "a": "60 requests per minute per key by default, configurable. Up to 5 concurrent requests per account."
+      },
+      {
+        "q": "Do I need foreign bank cards?",
+        "a": "No. All payment methods are local and in rubles; no VPN or foreign cards required."
+      }
+    ]
+  },
+  "cta": {
+    "headline": "Connect to the best LLMs in a minute",
+    "subline": "Create a key, top up your balance and send your first request. No foreign bank cards, no subscriptions.",
+    "getKey": "Get a key",
+    "telegram": "Or ask a question on Telegram"
+  },
+  "footer": {
+    "tagline": "An OpenAI-compatible gateway to leading language models. Balance in rubles, pay per token.",
+    "product": "Product",
+    "payment": "Payment",
+    "account": "Account",
+    "models": "Models & pricing",
+    "how": "How it works",
+    "docs": "Docs",
+    "sbp": "SBP",
+    "crypto": "Crypto",
+    "lolz": "Lolzteam Market",
+    "login": "Sign in",
+    "getKey": "Get a key",
+    "support": "Support",
+    "channel": "Telegram channel",
+    "rights": "All rights reserved."
+  },
+  "docs": {
+    "title": "Documentation",
+    "intro": "Uzel is an OpenAI-compatible gateway. If you already have OpenAI SDK code, just change the base URL and key.",
+    "quickstartTitle": "Quickstart",
+    "quickstartBody": "Create a key in the dashboard and pass it in the Authorization: Bearer header.",
+    "modelsTitle": "Model list",
+    "modelsBody": "The endpoint returns available models in OpenAI format.",
+    "streamTitle": "Streaming",
+    "streamBody": "Add \"stream\": true — the response arrives as server-sent events, passed through untouched.",
+    "anthropicTitle": "Anthropic format",
+    "anthropicBody": "The official @anthropic-ai/sdk works via the /v1/messages endpoint with x-api-key and anthropic-version headers.",
+    "errorsTitle": "Errors",
+    "errorsBody": "Errors are returned in OpenAI format. Main codes:",
+    "err401": "invalid or revoked key.",
+    "err402": "insufficient_quota, not enough balance.",
+    "err429": "rate limit exceeded, retry after Retry-After."
+  },
+  "auth": {
+    "loginTitle": "Sign in to your account",
+    "registerTitle": "Create an account",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "submit": "Sign in",
+    "submitRegister": "Create account",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "register": "Sign up",
+    "login": "Sign in",
+    "errorInvalid": "Invalid email or password",
+    "errorExists": "An account with this email already exists",
+    "errorPasswordLength": "Password must be at least 8 characters",
+    "errorPasswordMatch": "Passwords do not match",
+    "errorGeneric": "An error occurred during registration"
+  },
+  "dashboard": {
+    "overview": "Overview",
+    "keys": "API Keys",
+    "usage": "Usage",
+    "models": "Models & pricing",
+    "support": "Support",
+    "settings": "Settings",
+    "balance": "Balance",
+    "topUp": "Top up",
+    "recentUsage": "Recent requests",
+    "createKey": "Create key",
+    "keyName": "Key name",
+    "revokeKey": "Revoke",
+    "keyCreated": "Key created. Save it now — it won't be shown again.",
+    "emptyKeys": "Create your first key to get started",
+    "emptyUsage": "No requests yet",
+    "searchModels": "Search a model",
+    "signOut": "Sign out",
+    "allProviders": "All providers",
+    "spend30d": "Spend, last 30 days",
+    "requests30d": "Requests, last 30 days",
+    "tokens30d": "Tokens, last 30 days",
+    "dailySpend": "Daily spend",
+    "model": "Model",
+    "keyCol": "Key",
+    "tokensCol": "Tokens",
+    "cost": "Cost",
+    "timeCol": "Time",
+    "statusCol": "Status",
+    "latency": "Latency",
+    "provider": "Provider",
+    "context": "Context",
+    "priceIn": "Input, ₽/1M",
+    "priceOut": "Output, ₽/1M",
+    "created": "Created",
+    "lastUsed": "Last used",
+    "never": "Never",
+    "active": "Active",
+    "revoked": "Revoked",
+    "copy": "Copy",
+    "copied": "Copied",
+    "cancel": "Cancel",
+    "totalRequests": "Total requests",
+    "totalCost": "Total spent",
+    "totalTokens": "Total tokens",
+    "newTicket": "New ticket",
+    "subject": "Subject",
+    "category": "Category",
+    "message": "Message",
+    "send": "Send",
+    "statusOpen": "Open",
+    "statusAnswered": "Answered",
+    "statusClosed": "Closed",
+    "noTickets": "No tickets yet",
+    "categoryBilling": "Billing",
+    "categoryTech": "Technical",
+    "categoryOther": "Other",
+    "you": "You",
+    "supportTeam": "Support"
+  }
+}

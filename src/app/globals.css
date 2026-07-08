@@ -1,0 +1,342 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* ─── Dark/Light variant strategy ──────────────────────────────────────────── */
+@custom-variant dark (&:is(.dark *));
+
+/* ─── Design tokens: shadcn/ui bridge ──────────────────────────────────────── */
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-display);
+  --color-sidebar-ring: var(--border);
+  --color-sidebar-border: var(--border);
+  --color-sidebar-accent-foreground: var(--text);
+  --color-sidebar-accent: var(--surface-2);
+  --color-sidebar-primary-foreground: var(--accent-ink);
+  --color-sidebar-primary: var(--accent);
+  --color-sidebar-foreground: var(--text);
+  --color-sidebar: var(--surface);
+  --color-chart-5: var(--danger);
+  --color-chart-4: var(--warn);
+  --color-chart-3: var(--muted);
+  --color-chart-2: var(--neutral-2);
+  --color-chart-1: var(--accent);
+  --color-ring: var(--accent);
+  --color-input: var(--border);
+  --color-border: var(--border);
+  --color-destructive: var(--danger);
+  --color-accent-foreground: var(--accent-ink);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted);
+  --color-muted: var(--surface-2);
+  --color-secondary-foreground: var(--text);
+  --color-secondary: var(--surface-2);
+  --color-primary-foreground: var(--accent-ink);
+  --color-primary: var(--accent);
+  --color-popover-foreground: var(--text);
+  --color-popover: var(--surface);
+  --color-card-foreground: var(--text);
+  --color-card: var(--surface);
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 24px;
+  --radius-4xl: 28px;
+}
+
+/* ─── NeonLLM tokens: DARK (canonical) ─────────────────────────────────────── */
+.dark,
+:root {
+  --bg: oklch(0.13 0.01 255);
+  --surface: oklch(0.17 0.012 255);
+  --surface-2: oklch(0.21 0.014 255);
+  --border: color-mix(in oklab, white 8%, transparent);
+  --text: oklch(0.94 0.008 255);
+  --muted: oklch(0.64 0.014 255);
+  --accent: oklch(0.82 0.13 210);
+  --accent-ink: oklch(0.15 0.03 230);
+  --ok: oklch(0.78 0.14 160);
+  --warn: oklch(0.82 0.15 85);
+  --danger: oklch(0.66 0.2 25);
+  --neutral-1: oklch(0.55 0.01 255);
+  --neutral-2: oklch(0.42 0.01 255);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --glow: 0 0 20px oklch(0.82 0.13 210 / 0.15);
+}
+
+/* ─── NeonLLM tokens: LIGHT ────────────────────────────────────────────────── */
+.light {
+  --bg: oklch(0.975 0.004 95);
+  --surface: #ffffff;
+  --surface-2: oklch(0.955 0.005 95);
+  --border: color-mix(in oklab, black 9%, transparent);
+  --text: oklch(0.21 0.01 255);
+  --muted: oklch(0.45 0.012 255);
+  --accent: oklch(0.55 0.12 220);
+  --accent-ink: #ffffff;
+  --ok: oklch(0.55 0.14 160);
+  --warn: oklch(0.65 0.15 85);
+  --danger: oklch(0.55 0.2 25);
+  --neutral-1: oklch(0.72 0.01 255);
+  --neutral-2: oklch(0.85 0.008 255);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --glow: 0 0 20px oklch(0.55 0.12 220 / 0.1);
+}
+
+/* ─── Base layer ───────────────────────────────────────────────────────────── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "ss02", "cv01";
+  }
+
+  html {
+    @apply font-sans scroll-smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* JetBrains Mono for all numbers in data tables */
+  [data-tabular-nums] {
+    font-variant-numeric: tabular-nums;
+    font-family: var(--font-mono);
+  }
+
+  /* Heading styles */
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    font-size: clamp(2.6rem, 6vw, 4.5rem);
+    line-height: 1.05;
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.1;
+  }
+
+  h3 {
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    line-height: 1.2;
+    font-weight: 600;
+  }
+
+  /* Selection color */
+  ::selection {
+    background: oklch(0.82 0.13 210 / 0.25);
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--neutral-1);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--muted);
+  }
+
+  /* Focus visible */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+/* ─── Utility classes ──────────────────────────────────────────────────────── */
+@layer utilities {
+  /* Grain overlay for dark hero only */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.025;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  /* Glass morphism for navbar */
+  .glass {
+    backdrop-filter: blur(16px) saturate(1.2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  }
+
+  /* Subtle gradient card bg */
+  .gradient-card {
+    background: linear-gradient(
+      145deg,
+      color-mix(in oklab, var(--accent) 3%, transparent),
+      transparent 60%
+    );
+  }
+
+  /* Mono numbers */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+    font-family: var(--font-mono);
+  }
+
+  /* Single-hue accent gradient text — used on exactly one headline word */
+  .text-gradient-accent {
+    background: linear-gradient(
+      118deg,
+      var(--accent),
+      color-mix(in oklab, var(--accent) 55%, white)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Hairline top highlight for elevated cards */
+  .card-highlight {
+    box-shadow: inset 0 1px 0 color-mix(in oklab, white 6%, transparent);
+  }
+}
+
+/* ─── Code highlighting (Shiki dual-theme) ─────────────────────────────────── */
+.shiki {
+  background: transparent !important;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.shiki code {
+  font-family: inherit;
+  background: transparent;
+}
+
+.shiki,
+.shiki span {
+  color: var(--shiki-dark);
+}
+
+.light .shiki,
+.light .shiki span {
+  color: var(--shiki-light);
+}
+
+/* ─── Landing motion utilities ─────────────────────────────────────────────── */
+@layer utilities {
+  .animate-marquee {
+    animation: marquee 34s linear infinite;
+  }
+
+  .token-stream {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .token-dot {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    margin-top: -3px;
+    border-radius: 9999px;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: token-flow 3.5s linear infinite;
+  }
+
+  .ambient-backdrop {
+    background:
+      radial-gradient(
+        40% 50% at 20% 30%,
+        oklch(0.82 0.13 210 / 0.2),
+        transparent 70%
+      ),
+      radial-gradient(
+        45% 55% at 80% 70%,
+        oklch(0.62 0.11 210 / 0.16),
+        transparent 70%
+      );
+    filter: blur(24px);
+    animation: ambient-drift 18s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes token-flow {
+  0% {
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(320px);
+    opacity: 0;
+  }
+}
+
+@keyframes ambient-drift {
+  from {
+    transform: translate3d(-2%, -1%, 0) scale(1.04);
+  }
+  to {
+    transform: translate3d(2%, 1%, 0) scale(1.1);
+  }
+}
+
+/* ─── Reduced motion ───────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

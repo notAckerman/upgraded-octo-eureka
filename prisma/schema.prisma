@@ -1,0 +1,170 @@
+// ─── NeonLLM Prisma Schema ──────────────────────────────────────────────────
+// OpenAI-compatible LLM API proxy for the RU market.
+// Every monetary field is Decimal(14,6). Float for money is a build-blocking bug.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Enums ──────────────────────────────────────────────────────────────────
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum PayMethod {
+  LZT
+  CRYPTO
+  SBP
+}
+
+enum PayStatus {
+  PENDING
+  PAID
+  FAILED
+  EXPIRED
+}
+
+enum LedgerType {
+  DEPOSIT
+  CHARGE
+  REFUND
+  ADJUST
+}
+
+enum TicketStatus {
+  OPEN
+  ANSWERED
+  CLOSED
+}
+
+// ─── Models ─────────────────────────────────────────────────────────────────
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(USER)
+  balance      Decimal  @default(0) @db.Decimal(14, 6)
+  tgChatId     BigInt?
+  createdAt    DateTime @default(now())
+
+  keys    ApiKey[]
+  usage   UsageLog[]
+  payments Payment[]
+  tickets  Ticket[]
+  ledger   Ledger[]
+}
+
+model ApiKey {
+  id         String    @id @default(cuid())
+  userId     String
+  name       String
+  prefix     String // "sk-xxxx", shown in UI
+  keyHash    String    @unique // sha256 of full key; full key shown exactly once
+  rpm        Int       @default(60)
+  revoked    Boolean   @default(false)
+  lastUsedAt DateTime?
+  createdAt  DateTime  @default(now())
+
+  user  User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  usage UsageLog[]
+}
+
+model AiModel {
+  id            String  @id @default(cuid())
+  slug          String  @unique // "gpt-4o", what clients send
+  name          String
+  provider      String
+  upstreamModel String
+  inRub1M       Decimal @db.Decimal(14, 6)
+  outRub1M      Decimal @db.Decimal(14, 6)
+  baseInUsd1M   Decimal @db.Decimal(14, 6)
+  baseOutUsd1M  Decimal @db.Decimal(14, 6)
+  ctx           Int
+  enabled       Boolean @default(true)
+
+  usage UsageLog[]
+}
+
+model UsageLog {
+  id           String   @id @default(cuid())
+  userId       String
+  keyId        String
+  modelId      String
+  inTok        Int
+  outTok       Int
+  cost         Decimal  @db.Decimal(14, 6) // what the user paid
+  upstreamCost Decimal  @db.Decimal(14, 6) // what it cost us
+  ms           Int
+  status       String
+  estimated    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  user  User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  key   ApiKey  @relation(fields: [keyId], references: [id], onDelete: Cascade)
+  model AiModel @relation(fields: [modelId], references: [id], onDelete: Cascade)
+
+  @@index([createdAt])
+  @@index([userId, createdAt])
+}
+
+model Payment {
+  id         String    @id @default(cuid())
+  userId     String
+  method     PayMethod
+  amountRub  Decimal   @db.Decimal(14, 6)
+  status     PayStatus @default(PENDING)
+  externalId String    @unique
+  payload    Json?
+  createdAt  DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Ledger {
+  id        String     @id @default(cuid())
+  userId    String
+  type      LedgerType
+  amountRub Decimal    @db.Decimal(14, 6)
+  ref       String? // paymentId or usageLogId
+  createdAt DateTime   @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+}
+
+model Ticket {
+  id       String       @id @default(cuid())
+  userId   String
+  subject  String
+  category String // billing | api | other
+  status   TicketStatus @default(OPEN)
+  createdAt DateTime    @default(now())
+
+  user     User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages TicketMessage[]
+}
+
+model TicketMessage {
+  id        String   @id @default(cuid())
+  ticketId  String
+  fromRole  Role
+  body      String
+  createdAt DateTime @default(now())
+
+  ticket Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+
+  @@index([ticketId, createdAt])
+}
+
+model Setting {
+  key   String @id
+  value String
+}
